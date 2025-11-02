@@ -5,7 +5,7 @@ def preprocess_data(df):
     
     df_clean = df.copy()
     
-    # 1. Remover ID
+    # 1. Remoção da coluna ID do cliente
     df_clean.drop('customerID', axis=1, inplace=True)
     
     # 2. Tratamento coluna de Cobranças totais
@@ -14,15 +14,15 @@ def preprocess_data(df):
     print(f"Valores nulos em TotalCharges: {nulos_count}")
     df_clean['TotalCharges'] = df_clean['TotalCharges'].fillna(df_clean['TotalCharges'].median())
     
-    # 3. Separar variáveis
+    # 3. Separação das variáveis
     categorical_cols = df_clean.select_dtypes(include=['object']).columns
     
-    # 4. Aplicar encoding binário
+    # 4. Encoding binário
     binary_cols = []
     multi_cols = []
     
     for col in categorical_cols:
-        if col != 'Churn':  # Excluir target
+        if col != 'Churn':  
             if df_clean[col].nunique() == 2:
                 binary_cols.append(col)
             else:
@@ -33,7 +33,7 @@ def preprocess_data(df):
         df_clean[col] = le.fit_transform(df_clean[col])
     
     # 5. One-hot encoding
-    if multi_cols:  # Só executa se houver colunas múltiplas
+    if multi_cols: 
         df_clean = pd.get_dummies(df_clean, columns=multi_cols, drop_first=True)
     
     # 6. Encoding do target (Churn)
@@ -45,5 +45,5 @@ def preprocess_data(df):
     
     return df_clean
 
-# Usar a função corrigida
+# Função corrigida
 df_processed = preprocess_data(df)
