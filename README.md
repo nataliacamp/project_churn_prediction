@@ -36,23 +36,17 @@ Além disso, observou-se que clientes com contratos de longa duração (especial
    ├── README.md            # documentação
    └── requirements.txt     # dependências
    ```
-Para executar o projeto:
-1. Clone o repositório:
+Para execução do projeto:
    ```bash
-   git clone https://github.com/nataliacamp/project_churn_prediction.git
-   ```
-2. Instale as dependências:
-   ```bash  
-   pip install pandas numpy scikit-learn matplotlib seaborn
-   ```
-4. Execução do pipeline:
-   ```bash
-   from tratamento_dados import preprocessar_dados
-   from treinamento_modelos import treinar_avaliar_modelos, avaliar_modelos
-   
-   X_train, X_test, y_train, y_test, scaler = preprocessar_dados(df)
-   
-   modelos = treinar_avaliar_modelos(X_train, X_test, y_train, y_test)
+   !git clone https://github.com/nataliacamp/project_churn_prediction.git
+   %cd project_churn_prediction
 
-   resultados, comparacao = avaliar_modelos(modelos, y_test)
+   !pip install -r requirements.txt
+
+   exec(open('notebooks/01_data_loading_and_initial_exploration.py').read())
+   exec(open('notebooks/02_exploratory_data_analysis.py').read())
+   exec(open('notebooks/03_data_cleaning.py').read())
+   exec(open('notebooks/04_machine_learning_models.py').read())
+   exec(open('notebooks/05_results_analysis.py').read())
    ```
+
